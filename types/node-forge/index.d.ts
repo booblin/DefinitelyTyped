@@ -1,4 +1,4 @@
-// Type definitions for node-forge 0.6.43
+// Type definitions for node-forge 0.6.x
 // Project: https://github.com/digitalbazaar/forge
 // Definitions by: Seth Westphal <https://github.com/westy92>
 //                 Kay Schecker <https://github.com/flynetworks>
@@ -12,10 +12,28 @@ declare module "node-forge" {
     type Base64 = string;
     type Utf8 = string;
     type OID = string;
+    type PEM = string;
+    
+    namespace pem {
+        
+        interface EncodeOptions {
+			maxline?: number;
+		}
 
+		interface ObjectPEM {
+			type: string;
+			body: Bytes;
+			procType?: any;
+			contentDomain?: any;
+			dekInfo?: any;
+		}
+
+		function encode(msg: ObjectPEM, options: EncodeOptions): PEM;
+		function decode(str: PEM): ObjectPEM;
+    }
+    
     namespace pki {
-
-        type PEM = string;
+        
         type Key = any;
 
         interface KeyPair {
